@@ -1,0 +1,259 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', 'Courier New', monospace;
+  background: #1e1e1e;
+  color: #d4d4d4;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.editor-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #1e1e1e;
+}
+
+.editor-main {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.viewport {
+  flex: 1;
+  overflow-y: auto;
+  outline: none;
+}
+
+.line {
+  display: flex;
+  align-items: center;
+  white-space: pre;
+  border-left: 2px solid transparent;
+  position: relative;
+  font-size: 14px;
+  cursor: text;
+}
+
+.line.cursor {
+  background: #2a2d2e;
+  border-left-color: #007acc;
+}
+
+.line.bookmarked .gutter::after {
+  content: '★';
+  color: #ffcc00;
+  margin-left: 4px;
+}
+
+.line.search-result .content {
+  background: rgba(255, 200, 0, 0.2);
+}
+
+.gutter {
+  width: 50px;
+  text-align: right;
+  padding-right: 8px;
+  color: #858585;
+  background: #252526;
+  border-right: 1px solid #3e3e42;
+  margin-right: 8px;
+  flex-shrink: 0;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.content {
+  flex: 1;
+  white-space: pre;
+}
+
+.content .keyword {
+  color: #569cd6;
+}
+
+.content .string {
+  color: #ce9178;
+}
+
+.content .comment {
+  color: #6a9955;
+}
+
+.content .number {
+  color: #b5cea8;
+}
+
+.guide {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #007acc;
+  opacity: 0.2;
+  pointer-events: all;
+  cursor: pointer;
+}
+
+.guide:hover {
+  opacity: 0.8;
+  background: #ff8c00;
+}
+
+.which-key {
+  position: fixed;
+  bottom: 40px;
+  left: 20px;
+  background: #252526;
+  border: 1px solid #007acc;
+  padding: 12px;
+  border-radius: 6px;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  color: #d4d4d4;
+}
+
+.which-key .options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+  color: #9cdcfe;
+  font-size: 12px;
+}
+
+.status-bar {
+  height: 24px;
+  background: #007acc;
+  border-top: 1px solid #3e3e42;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  color: white;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.status-bar .mode {
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-weight: bold;
+}
+
+.status-bar .mode.normal {
+  background: #2d2d2d;
+  color: white;
+}
+
+.status-bar .mode.insert {
+  background: #2d5a2d;
+  color: white;
+}
+
+.status-bar .zen-toggle {
+  cursor: pointer;
+  padding: 2px 6px;
+  background: #1e1e1e;
+  border-radius: 3px;
+}
+
+.minimap {
+  width: 60px;
+  background: #252526;
+  border-left: 1px solid #3e3e42;
+  overflow: hidden;
+}
+
+.minimap-block {
+  width: 100%;
+  transition: opacity 0.1s;
+}
+
+.breadcrumbs {
+  background: #252526;
+  padding: 4px 8px;
+  border-bottom: 1px solid #3e3e42;
+  font-size: 12px;
+  color: #9cdcfe;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumb-text {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 4px;
+}
+
+.separator {
+  margin: 0 4px;
+  color: #858585;
+}
+
+.filter-bar, .search-bar {
+  position: sticky;
+  top: 0;
+  background: #252526;
+  border-bottom: 1px solid #007acc;
+  padding: 8px;
+  display: flex;
+  gap: 4px;
+  z-index: 10;
+}
+
+.filter-bar input, .search-bar input {
+  flex: 1;
+  background: #1e1e1e;
+  color: #d4d4d4;
+  border: 1px solid #3e3e42;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.filter-bar button, .search-bar button {
+  background: #1e1e1e;
+  color: #d4d4d4;
+  border: 1px solid #3e3e42;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.editor-container.zen .status-bar,
+.editor-container.zen .minimap {
+  display: none;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #252526;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3e3e42;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #007acc;
+}
