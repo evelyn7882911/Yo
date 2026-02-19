@@ -1,0 +1,54 @@
+{
+  "name": "hierarchical-fold-editor",
+  "displayName": "Hierarchical Fold Editor",
+  "description": "Tree-based structured custom editor for VS Code with modal navigation and intelligent folding.",
+  "version": "0.1.0",
+  "publisher": "evelyn7882911",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCustomEditor:hierarchicalFoldEditor.treeEditor"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "customEditors": [
+      {
+        "viewType": "hierarchicalFoldEditor.treeEditor",
+        "displayName": "Tree Editor",
+        "selector": [
+          {
+            "filenamePattern": "*.tree"
+          }
+        ]
+      }
+    ],
+    "configuration": {
+      "title": "Hierarchical Fold Editor",
+      "properties": {
+        "hierarchicalFoldEditor.leaderKey": {
+          "type": "string",
+          "default": "Space",
+          "description": "Leader key for modal commands."
+        },
+        "hierarchicalFoldEditor.autoReveal": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically reveal active node."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.0.0"
+  }
+}
